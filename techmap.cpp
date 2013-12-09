@@ -19,6 +19,8 @@
 #include "litimpl.h"
 #include "opt.h"
 
+#include "tmat.h"
+
 using namespace std;
 using namespace chdl;
 
