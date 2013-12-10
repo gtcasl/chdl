@@ -22,6 +22,7 @@
 
 #include <hierarchy.h>
 #include <techmap.h>
+#include <tmat.h>
 
 #include "report.h"
 
@@ -517,10 +518,6 @@ int main() {
 
   cerr << "Critical path: " << critpath() << endl;
 
-  // Do the simulation
-  ofstream wave_file("example6.vcd");
-  run(wave_file, 1000);
-
   // Print the netlist
   ofstream netlist_file("example6.nand");
   print_netlist(netlist_file);
@@ -533,6 +530,28 @@ int main() {
 
   ofstream schem_file("example6.dot");
   dot_schematic(schem_file);
+
+  // Do the simulation
+  ofstream wave_file("example6.vcd");
+  run(wave_file, 1000);
+
+  // Print transition matrices:
+  ofstream mat("example6.tmat");
+  tmat_report(mat);
+
+  ifstream elib("ELIB");
+  while (!!elib) {
+    string type;
+    elib >> type;
+    vector<double> emat;
+    //cout << "Reading for " << type << endl;
+    do {
+      double d;
+      elib >> d;
+      emat.push_back(d);
+    } while (!!elib && elib.peek() != '\n');
+    if (!!elib) tmat_compute(type, emat);
+  }
 
   report();
 

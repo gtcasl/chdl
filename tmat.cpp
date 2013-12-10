@@ -52,3 +52,24 @@ void chdl::tmat::dump(std::ostream &out) {
 
   out << endl; 
 }
+
+template <typename A, typename B>
+  double dotprod(const vector<A> &a, const vector<B> &b)
+{
+  double sum(0);
+  for (unsigned i = 0; i < a.size(); ++i)
+    sum += a[i] * b[i];
+  return sum;
+}
+
+void chdl::tmat_compute(const string &name, const vector<double> &emat) {
+  cout << name << ":";
+  bool first(true);
+  for (auto it = tmats.find(name); it != tmats.end() && it->first == name; ++it)
+  {
+    if (!first) cout << ',';
+    else first = false;
+    cout << dotprod(emat, it->second->tcount);
+  }
+  cout << endl;
+}
