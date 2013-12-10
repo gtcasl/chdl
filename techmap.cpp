@@ -498,10 +498,13 @@ void chdl::techmap(ostream &out, const char* tlibFile) {
       while (!bestmaps[n].empty()) {
         mapping &m(bestmaps[n].front());
         out << "  " << tlib[m.t].second;
+        vector<node> inputs;
         for (auto x : m.input) {
+          inputs.push_back(x.second);
           if (!tlib[m.t].first.seq) next_nodes.insert(x.second);
           out << ' ' << x.second;
         }
+        add_tmat(inputs);
         out << ' ' << n << endl;
         bestmaps[n].pop_front();
       }

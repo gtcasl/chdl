@@ -23,6 +23,8 @@ namespace chdl {
     node n;
     T x;
   };
+
+  void print_tmat(std::ostream &out);
 }
 
 template <typename T> void chdl::EgressFunc(const T &f, chdl::node n) {
