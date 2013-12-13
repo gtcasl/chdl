@@ -89,7 +89,7 @@ int main(int argc, char **argv) {
   cout << "Critical path length: " << critpath() << endl;
 
   // Print transition matrices:
-  ofstream mat("example6.tmat");
+  ofstream mat("example2.tmat");
   tmat_report(mat);
 
   ifstream elib("ELIB");
